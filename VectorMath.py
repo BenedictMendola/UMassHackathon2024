@@ -9,6 +9,7 @@ class Vector3:
 
     def normalized(self):
         mag = self.magnitude()
+        if(mag == 0): return Vector3(0,0,0)
         return Vector3(self.x / mag, self.y / mag, self.z / mag)
 
     def magnitude(self):

@@ -13,7 +13,7 @@ class GameObject:
         rotation=0,
         scale=VectorMath.Vector3(3, 3, 3),
         sprite="Assets/RedCircle1.png",
-        name = ""):
+        name = "",):
         self.transform = Transform.Transform(position, rotation, scale)
         self.name = name
         self.sr = SpriteRenderer.SpriteRenderer(sprite)
@@ -26,3 +26,5 @@ class GameObject:
         self.collider = Physics.Collider(upper, lower, left, right, r)
     def addPlayerController(self):
         self.controller = Movement.PlayerController()
+    def addAINewtwork(self,network):
+        self.network = network
