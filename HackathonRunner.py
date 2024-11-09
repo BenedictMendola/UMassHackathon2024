@@ -55,5 +55,4 @@ while running:
     pygame.display.flip()
 
     TimeManager.TimeTracker.updateTime()
-    print(TimeManager.TimeTracker.deltatime)
 pygame.quit()
