@@ -16,4 +16,4 @@ def addforce(rb, force):
 def update(rb, delta_time):
     displacement = rb.velocity.scale(delta_time)
     rb.game_object.transform.position = rb.game_object.transform.position + displacement
-    rb.velocity = rb.velocity.scale(0.99)
+    rb.velocity = rb.velocity.scale(0.5)  # Reduced damping from 0.99 to 0.999

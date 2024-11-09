@@ -3,7 +3,7 @@ import VectorMath
 
 
 class Movement:
-    def __init__(self, accel_amount=0.5):
+    def __init__(self, accel_amount=1000):  # Increased from 0.5 to 1.0
         self.xdir = 0  # -1 for left, 1 for right
         self.ydir = 0  # -1 for up, 1 for down
         self.accel_amount = accel_amount

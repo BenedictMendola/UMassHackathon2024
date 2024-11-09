@@ -18,7 +18,7 @@ ball = GameObjects.GameObject(VectorMath.Vector3(300, 300, 0))
 ball.rigidbody = Physics.RigidBody(
     velocity=VectorMath.Vector3(0, 0, 0), mass=1, angularVelocity=0, game_object=ball
 )
-ball.rigidbody.top_speed = 5  # Set the top speed
+# ball.rigidbody.top_speed = 5  # Remove or comment out this line
 gameObjects.append(ball)
 
 clock = pygame.time.Clock()
