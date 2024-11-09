@@ -2,7 +2,7 @@ import pygame
 import VectorMath
 
 
-class Movement:
+class PlayerController:
     def __init__(self, accel_amount=100):  # Increased from 0.5 to 100
         # Track individual key states
         self.is_a_pressed = False  # Track 'A' key

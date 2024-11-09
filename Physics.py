@@ -79,9 +79,9 @@ def updateCollision(gameObjects):
     for ob in gameObjects:
         if ob.name == "Player":
             playerObject = ob
-    for obj in gameObjects:
-        if obj.name != 'Player':
-            collision(playerObject,obj)
+        for obj in gameObjects:
+            if obj.name != 'Player':
+                collision(playerObject,obj)
     
         
         

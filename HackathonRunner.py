@@ -17,6 +17,7 @@ pygame.init()
 gameObjects = []  # this contains all gameobjects, do not store any permanent game objects anywhere else
 
 gameObjects.append(Prefabs.makePlayer()) # Creates the player Object
+gameObjects.append(Prefabs.makePlayer(position=VectorMath.Vector3(150,150,200)))
 
 print(gameObjects[0].sr)
 
@@ -34,7 +35,7 @@ gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Ve
 running = True  # AWAYS TRUE WHEN GAME IS RUNNING
 
 # Initialize Movement
-movement = Movement.Movement()
+movement = Movement.PlayerController()
 
 while running:
 
@@ -49,9 +50,7 @@ while running:
     if acceleration.magnitude() > 0:
         Physics.addforce(gameObjects[0].rigidbody, acceleration)
 
-    Physics.update(
-        gameObjects[0].rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height
-    )
+    Physics.update(gameObjects[0].rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
