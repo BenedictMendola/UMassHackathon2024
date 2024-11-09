@@ -5,8 +5,8 @@ import json
 import os
 
 #settings
-totalBots = 64
-evoFactor = .5
+totalBots = 48
+evoFactor = .3
 
 # usefull methods
 
