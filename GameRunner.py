@@ -95,14 +95,16 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
     for i in range(len(networks)):
         x = Prefabs.makePlayer(VectorMath.Vector3(150,150,0))
         x.addAINewtwork(networks[i])
+        x.network.score = 0
         gameObjects.append(x) # Creates the player Object with network
     
 
 
     #gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(300,600,300),VectorMath.Vector3(20,5,3)))
 
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(300,300,300),VectorMath.Vector3(10,10,3)))
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(500,300,300),VectorMath.Vector3(3,20,3)))
+    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(600,650,300),VectorMath.Vector3(10,10,3)))
+    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Vector3(3,20,3)))
+    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(360,355,300),VectorMath.Vector3(3,10,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(700,300,300),VectorMath.Vector3(40,3,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(000,000,300),VectorMath.Vector3(300,3,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(000,720,300),VectorMath.Vector3(300,3,3)))
@@ -177,7 +179,7 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
         for player in PlayerList:
             Physics.update(player.rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height)
             player.network.setScore(player.transform.position)
-        if (TimeManager.TimeTracker.timeSinceStart() > 10):
+        if (TimeManager.TimeTracker.timeSinceStart() > 17.5):
             running = False
 
         Physics.updateCollision(gameObjects)

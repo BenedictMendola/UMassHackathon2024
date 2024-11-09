@@ -82,6 +82,8 @@ def updateCollision(gameObjects):
         for obj in gameObjects:
             if obj.name != 'Player':
                 collision(playerObject,obj)
+                if(playerObject.network != None):
+                    playerObject.network.score += .01
     
         
         

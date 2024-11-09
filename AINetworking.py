@@ -1,6 +1,8 @@
 import math
 import VectorMath
 
+
+
 def makeItTo0TO1(x): return 1/(1 + pow(math.e,-x))
 
 def isInBounds(point:VectorMath.Vector3,barriers):
@@ -23,9 +25,8 @@ class Network():
         self.weights3 = weightsRow3
         self.weights4 = WeightsRow4
         self.score = score
-
     def setScore(self,positon):
-        self.score = math.sqrt(pow(1280-positon.x,2)+ pow(720-positon.y,2))
+        self.score += math.sqrt(pow(1280-positon.x,2)+ pow(720-positon.y,2))
     
     def getInputs(position: VectorMath.Vector3,gameObjects,velocity=VectorMath.Vector3(0,0,0)): #Idea, have a point go out until it is within a colider -  checks what is the closes barrier and what type for all directins
         barriers = [ob for ob in gameObjects if ob.name != 'Player']
@@ -66,7 +67,7 @@ class Network():
         readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
         finalValue = [Network.weightedSumForAllOfWeight(readyForRow4Inputs,weight) for weight in self.weights4]
         #print(sum(finalValue))
-        return (sum(readyForRow3Inputs))
+        return (sum(finalValue))
     
     def to_dict(self):
         return {
