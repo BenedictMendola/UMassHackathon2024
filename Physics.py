@@ -66,6 +66,7 @@ def collision(object1, object2):
     if(xOverlap and yOverlap):
         if(object2.name == "killBox"):
             object1.transform.position = VectorMath.Vector3(100,100,0)
+            object1.network.score += 100
             return
         collsionForce(object1)
     # print(f"radius = {r}")  
@@ -83,7 +84,7 @@ def updateCollision(gameObjects):
             if obj.name != 'Player':
                 collision(playerObject,obj)
                 if(playerObject.network != None):
-                    playerObject.network.score += .01
+                    playerObject.network.score += 0
     
         
         

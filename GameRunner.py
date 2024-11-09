@@ -100,7 +100,7 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
     
 
 
-    #gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(300,600,300),VectorMath.Vector3(20,5,3)))
+    #gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(400,150,300),VectorMath.Vector3(5,5,3)))
 
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(600,650,300),VectorMath.Vector3(10,10,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Vector3(3,20,3)))
@@ -157,14 +157,14 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
             #     player.controller.is_w_pressed = False
             #     player.controller.is_s_pressed = True
 
-            if (moveDir <= 8 or moveDir >= 8.4): player.controller.is_a_pressed = True
-            else: player.controller.is_a_pressed = False
-            if (7.9 <= moveDir <= 8.2): player.controller.is_w_pressed = True
-            else:player.controller.is_w_pressed = False
-            if(8.1 <= moveDir <= 8.3):  player.controller.is_d_pressed = True
+            if (moveDir <= 6.5 or moveDir >= 8.5): player.controller.is_d_pressed = True
             else: player.controller.is_d_pressed = False
-            if(8.2<= moveDir): player.controller.is_s_pressed = True
-            else: player.controller.is_s_pressed = False
+            if (6 <= moveDir <= 7.5): player.controller.is_s_pressed = True
+            else:player.controller.is_s_pressed = False
+            if(7.3 <= moveDir <= 8.3):  player.controller.is_a_pressed = True
+            else: player.controller.is_a_pressed = False
+            if(8.1<= moveDir): player.controller.is_w_pressed = True
+            else: player.controller.is_w_pressed = False
 
 
 

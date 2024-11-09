@@ -52,7 +52,8 @@ class Network():
         #print([makeItTo0TO1(right/1000),makeItTo0TO1(left/1000),makeItTo0TO1(up/1000),makeItTo0TO1(down/1000)])
         
 
-        return (makeItTo0TO1(right/1000),makeItTo0TO1(left/1000),makeItTo0TO1(up/1000),makeItTo0TO1(down/1000),velocity.normalized().x,velocity.normalized().y)
+        return (makeItTo0TO1(right/1000),makeItTo0TO1(left/1000),makeItTo0TO1(up/1000),makeItTo0TO1(down/1000),velocity.normalized().x,velocity.normalized().y,
+                makeItTo0TO1(position.x),makeItTo0TO1(position.y))
             
 
 
@@ -64,10 +65,11 @@ class Network():
     def calculateInput(self,inputs) -> float: #gives a float beetween 0 and 1, each input is the distance to the nearest wall, or (0 = up killbox,.33 = right,.66 =down, 1 = left) 0 = normal wall
         readyForRow2Inputs = [Network.weightedSumForAllOfWeight(inputs,weight) for weight in self.weights1]
         readyForRow3Inputs = [Network.weightedSumForAllOfWeight(readyForRow2Inputs,weight) for weight in self.weights2]
-        readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
-        finalValue = [Network.weightedSumForAllOfWeight(readyForRow4Inputs,weight) for weight in self.weights4]
+        #readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
+        #finalValue = [Network.weightedSumForAllOfWeight(readyForRow4Inputs,weight) for weight in self.weights4]
+        #print(sum(readyForRow3Inputs))
         #print(sum(finalValue))
-        return (sum(finalValue))
+        return (sum(readyForRow3Inputs))
     
     def to_dict(self):
         return {

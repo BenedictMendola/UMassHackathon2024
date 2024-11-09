@@ -5,8 +5,8 @@ import json
 import os
 import csv
 #settings
-totalBots = 48
-evoFactor = .03
+totalBots = 64
+evoFactor = .9
 
 
 
@@ -33,7 +33,7 @@ def loadData(fName):
     returnList = []
     with open(fName, newline='' ) as cvsfile:
         reader = csv.reader(cvsfile)
-        for i in range(32):
+        for i in range(64):
             weights1 = next(reader)
             for i in range(len(weights1)):
                 weights1[i] = float(weights1[i])
@@ -75,13 +75,13 @@ while running:
     #print([result.score for result in halfNetworks])
     newNetworks = []
     for i in range(int(totalBots/2)):
-        weights1 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights2 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights3 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights4 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
+        weights1 = [(halfNetworks[i].weights1[j] - ((random.random()- .5) * evoFactor)) for j in range(8)]
+        weights2 = [(halfNetworks[i].weights1[j] - ((random.random() - .5) * evoFactor)) for j in range(8)]
+        weights3 = [(halfNetworks[i].weights1[j] - ((random.random() - .5) * evoFactor)) for j in range(8)]
+        weights4 = [(halfNetworks[i].weights1[j] - ((random.random() - .5) * evoFactor)) for j in range(8)]
         newNetwork = AINetworking.Network(weights1,weights2,weights3,weights4)
         halfNetworks.append(newNetwork)
-        
+
     allNetworks = halfNetworks + newNetworks
     print(len(allNetworks))
 
