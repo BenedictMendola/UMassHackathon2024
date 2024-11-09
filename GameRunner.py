@@ -5,6 +5,7 @@ import TimeManager
 import Physics
 import Prefabs
 import AINetworking
+import random
 
 def game():
 
@@ -93,7 +94,7 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
     gameObjects = []  # this contains all gameobjects, do not store any permanent game objects anywhere else
 
     for i in range(len(networks)):
-        x = Prefabs.makePlayer(VectorMath.Vector3(150,150,0))
+        x = Prefabs.makePlayer(VectorMath.Vector3(150 + random.randint(-10,10),random.randint(-10,10)+ 150,0))
         x.addAINewtwork(networks[i])
         x.network.score = 0
         gameObjects.append(x) # Creates the player Object with network
@@ -163,7 +164,7 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
             else:player.controller.is_s_pressed = False
             if(7.3 <= moveDir <= 8.3):  player.controller.is_a_pressed = True
             else: player.controller.is_a_pressed = False
-            if(8.1<= moveDir): player.controller.is_w_pressed = True
+            if(8.1<= moveDir or moveDir <= 5.9): player.controller.is_w_pressed = True
             else: player.controller.is_w_pressed = False
 
 
