@@ -6,8 +6,10 @@ import TimeManager
 import Physics
 import Movement
 
-renderer = Renderer.Renderer((600, 800))
+# Define screen dimensions
+screen_width, screen_height = 1280, 720  # Updated resolution
 
+renderer = Renderer.Renderer((screen_width, screen_height))
 
 pygame.init()
 
@@ -40,7 +42,9 @@ while running:
     if acceleration.magnitude() > 0:
         Physics.addforce(ball.rigidbody, acceleration)
 
-    Physics.update(ball.rigidbody, TimeManager.TimeTracker.deltatime)
+    Physics.update(
+        ball.rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height
+    )
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
