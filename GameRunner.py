@@ -134,27 +134,32 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
             movementNumber = player.network.calculateInput(inputs)
             moveDir = (movementNumber)
             #print(moveDir)
-            if (moveDir <= 7.8):
-                player.controller.is_a_pressed = True
-                player.controller.is_d_pressed = False
-                player.controller.is_w_pressed = False
-                player.controller.is_s_pressed = False
-            elif(moveDir <=8.1):
-                player.controller.is_a_pressed = False
-                player.controller.is_d_pressed = True
-                player.controller.is_w_pressed = False
-                player.controller.is_s_pressed = False
-            elif(moveDir <=8.4):
-                player.controller.is_a_pressed = False
-                player.controller.is_d_pressed = False
-                player.controller.is_w_pressed = True
-                player.controller.is_s_pressed = False
-            else:
-                player.controller.is_a_pressed = False
-                player.controller.is_d_pressed = False
-                player.controller.is_w_pressed = False
-                player.controller.is_s_pressed = True
-            
+            # if (moveDir <= 7.8):
+            #     player.controller.is_a_pressed = True
+            #     player.controller.is_d_pressed = False
+            #     player.controller.is_w_pressed = False
+            #     player.controller.is_s_pressed = False
+            # elif(moveDir <=8.1):
+            #     player.controller.is_a_pressed = False
+            #     player.controller.is_d_pressed = True
+            #     player.controller.is_w_pressed = False
+            #     player.controller.is_s_pressed = False
+            # elif(moveDir <=8.4):
+            #     player.controller.is_a_pressed = False
+            #     player.controller.is_d_pressed = False
+            #     player.controller.is_w_pressed = True
+            #     player.controller.is_s_pressed = False
+            # else:
+            #     player.controller.is_a_pressed = False
+            #     player.controller.is_d_pressed = False
+            #     player.controller.is_w_pressed = False
+            #     player.controller.is_s_pressed = True
+
+            if (moveDir <= 8): player.controller.is_a_pressed = True
+            else: player.controller.is_a_pressed = False
+            if (7.8 <= moveDir <= 8.2): player.controller.is_w_pressed = True
+            else:player.controller.is_w_pressed = False
+            if(8.1 <= moveDir <= 8.3):  player.controller.is_w_pressed = True
 
 
 
