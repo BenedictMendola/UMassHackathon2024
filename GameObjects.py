@@ -15,6 +15,7 @@ class GameObject:
         name = ""
     ):
         self.transform = Transform.Transform(position, rotation, scale)
+        self.name = name
         self.sr = SpriteRenderer.SpriteRenderer(sprite)
         self.rigidbody = Physics.RigidBody(
             velocity=VectorMath.Vector3(0, 0, 0),

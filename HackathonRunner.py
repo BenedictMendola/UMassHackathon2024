@@ -5,6 +5,7 @@ import GameObjects
 import TimeManager
 import Physics
 import Movement
+import Prefabs
 
 # Define screen dimensions
 screen_width, screen_height = 1280, 720  # Updated resolution
@@ -13,33 +14,23 @@ renderer = Renderer.Renderer((screen_width, screen_height))
 
 pygame.init()
 
-gameObjects = (
-    []
-)  # this contains all gameobjects, do not store any permanent game objects anywhere else
-ball = GameObjects.GameObject(VectorMath.Vector3(300, 300, 0), name='Player')
-ball.rigidbody = Physics.RigidBody(
-    velocity=VectorMath.Vector3(0, 0, 0), mass=1, angularVelocity=0, game_object=ball
-)
-# ball.rigidbody.top_speed = 5  # Remove or comment out this line
-ball.addCollider(r= ball.sr.surface.get_height()/2)
-gameObjects.append(ball)
+gameObjects = []  # this contains all gameobjects, do not store any permanent game objects anywhere else
 
+gameObjects.append(Prefabs.makePlayer()) # Creates the player Object
 
-# testing collision stuff
-obstacle1 = GameObjects.GameObject(VectorMath.Vector3(500, 500, 0), name='Player', sprite="Assets/Rectangle.png")
-obstacle1.rigidbody = Physics.RigidBody(
-    velocity=VectorMath.Vector3(0, 0, 0), mass=1, angularVelocity=0, game_object=obstacle1
-)
+print(gameObjects[0].sr)
 
-obstacle1.addCollider(upper=obstacle1.sr.surface.get_height()/2)
-obstacle1.addCollider(left=obstacle1.sr.surface.get_width()/2)
-gameObjects.append(obstacle1)
+gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(300,600,300),VectorMath.Vector3(20,5,3)))
 
-# obstacle1.addCollider(2,2,2,2) # random bullshit for now
+gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(300,300,300),VectorMath.Vector3(10,10,3)))
+gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(500,300,300),VectorMath.Vector3(3,20,3)))
+gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Vector3(50,3,3)))
 
 
 
-clock = pygame.time.Clock()
+
+
+
 running = True  # AWAYS TRUE WHEN GAME IS RUNNING
 
 # Initialize Movement
@@ -56,15 +47,18 @@ while running:
     acceleration = movement.get_acceleration()
 
     if acceleration.magnitude() > 0:
-        Physics.addforce(ball.rigidbody, acceleration)
+        Physics.addforce(gameObjects[0].rigidbody, acceleration)
 
     Physics.update(
-        ball.rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height
+        gameObjects[0].rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height
     )
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    Physics.updateCollision(gameObjects)
+
 
     renderer.renderFrame(gameObjects)
 
@@ -72,5 +66,5 @@ while running:
 
     TimeManager.TimeTracker.updateTime()
     
-    Physics.collision(ball, obstacle1)
+    
 pygame.quit()
