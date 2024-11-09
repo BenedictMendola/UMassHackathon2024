@@ -1,24 +1,36 @@
 import pygame
 import VectorMath
+import Renderer
+import GameObjects
+import TimeManager
 
-vectorCool = VectorMath.Vector3(5,3,2)
-print(vectorCool.normalized().magnitude())
+renderer = Renderer.Renderer((600,800))
+
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+
+gameObjects = [] # this contains all gameobjects, do not store any permanent game objects anywhere else
+gameObjects.append(GameObjects.GameObject(VectorMath.Vector3(300,300,0)))
+
 clock = pygame.time.Clock()
-running = True
+running = True # AWAYS TRUE WHEN GAME IS RUNNING
+
+
 
 while running:
+
+
+
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill("purple")
+    renderer.renderFrame(gameObjects)
 
     pygame.display.flip()
 
-    clock.tick(60)
-
+    TimeManager.TimeTracker.updateTime()
+    print(TimeManager.TimeTracker.deltatime)
 pygame.quit()
