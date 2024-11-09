@@ -12,6 +12,7 @@ class GameObject:
         rotation=0,
         scale=VectorMath.Vector3(3, 3, 3),
         sprite="Assets/RedCircle1.png",
+        name = ""
     ):
         self.transform = Transform.Transform(position, rotation, scale)
         self.sr = SpriteRenderer.SpriteRenderer(sprite)
@@ -21,3 +22,5 @@ class GameObject:
             angularVelocity=0,
             game_object=self,
         )
+    def addCollider(self,upper, lower, left, right, r=0):
+        self.collider = Physics.Collider(upper, lower, left, right, r)
