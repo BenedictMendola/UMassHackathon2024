@@ -1,20 +1,24 @@
 import pygame
+import VectorMath
 
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
+vectorCool = VectorMath.Vector3(5,3,2)
+print(vectorCool.normalized().magnitude())
 
-while running:
+# pygame.init()
+# screen = pygame.display.set_mode((1280, 720))
+# clock = pygame.time.Clock()
+# running = True
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+# while running:
 
-    screen.fill("purple")
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
 
-    pygame.display.flip()
+#     screen.fill("purple")
 
-    clock.tick(60)
+#     pygame.display.flip()
 
-pygame.quit()
+#     clock.tick(60)
+
+# pygame.quit()
