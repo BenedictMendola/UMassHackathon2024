@@ -1,9 +1,12 @@
 import time
 
-class TimeTracker:
-    deltatime = 0
-    oldTime = -.01
 
+class TimeTracker:
+    last_time = time.time()
+    deltatime = 0
+
+    @staticmethod
     def updateTime():
-        TimeTracker.deltatime = time.time() -TimeTracker.oldTime
-        TimeTracker.oldTime = time.time()
+        current_time = time.time()
+        TimeTracker.deltatime = current_time - TimeTracker.last_time
+        TimeTracker.last_time = current_time

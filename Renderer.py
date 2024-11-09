@@ -3,28 +3,29 @@ import pygame
 
 class Renderer:
 
-    def __init__(self,screenSize: tuple):
+    def __init__(self, screenSize: tuple):
         self.screenSize = screenSize
         self.screen = pygame.display.set_mode(screenSize)
-        self.backgroundColor = pygame.Color(0,200,200)
-    
-    def renderFrame(self,objects: list):
-       self.screen.fill(self.backgroundColor)
+        self.backgroundColor = pygame.Color(0, 200, 200)
 
-       for object in objects:
-            if(object.sr != None):
+    def renderFrame(self, objects: list):
+        self.screen.fill(self.backgroundColor)
+
+        for object in objects:
+            if object.sr != None:
                 objectSurface = object.sr.surface
-                objectSurface = pygame.transform.scale(objectSurface,\
-                                                       (objectSurface.get_width() * object.transform.scale.x,\
-                                                        objectSurface.get_height() *object.transform.scale.y))
+                objectSurface = pygame.transform.scale(
+                    objectSurface,
+                    (
+                        objectSurface.get_width() * object.transform.scale.x,
+                        objectSurface.get_height() * object.transform.scale.y,
+                    ),
+                )
 
-                #this is the topright conner of the sprite, subtract half the hight and width
-                xPlacement = object.transform.position.x - objectSurface.get_width()/2
-                yPlacement = object.transform.position.y - objectSurface.get_height()/2
+                # this is the topright conner of the sprite, subtract half the hight and width
+                xPlacement = object.transform.position.x - objectSurface.get_width() / 2
+                yPlacement = (
+                    object.transform.position.y - objectSurface.get_height() / 2
+                )
 
-                self.screen.blit(objectSurface,(xPlacement,yPlacement))
-               
-
-
-
-       pygame.display.flip()
+                self.screen.blit(objectSurface, (xPlacement, yPlacement))
