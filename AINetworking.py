@@ -33,19 +33,19 @@ class Network():
         #right
         #print(cursor.y)
         while(not isInBounds(cursor,barriers)):
-            cursor.x += 5
+            cursor.x += 15
         right = cursor.x -position.x
         cursor = VectorMath.Vector3(position.x,position.y,position.z)
         while(not isInBounds(cursor,barriers)):
-            cursor.x -= 5
+            cursor.x -= 15
         left =position.x - cursor.x
         cursor = VectorMath.Vector3(position.x,position.y,position.z)
         while(not isInBounds(cursor,barriers)):
-            cursor.y -= 5
+            cursor.y -= 15
         up = position.y - cursor.y
         cursor = VectorMath.Vector3(position.x,position.y,position.z)
         while(not isInBounds(cursor,barriers)):
-            cursor.y += 5
+            cursor.y += 15
         down = cursor.y - position.y
         cursor = VectorMath.Vector3(position.x,position.y,position.z)
         #print([makeItTo0TO1(right/1000),makeItTo0TO1(left/1000),makeItTo0TO1(up/1000),makeItTo0TO1(down/1000)])
@@ -66,6 +66,6 @@ class Network():
         readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
         finalValue = [Network.weightedSumForAllOfWeight(readyForRow4Inputs,weight) for weight in self.weights4]
         #print(sum(finalValue))
-        return (sum(readyForRow2Inputs))
+        return (sum(readyForRow3Inputs))
     
 #def choose(dir)

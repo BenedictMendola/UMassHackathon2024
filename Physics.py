@@ -19,7 +19,7 @@ def addforce(rb, force):
 def update(rb, delta_time, screen_width, screen_height):
     displacement = rb.velocity.scale(delta_time)
     rb.game_object.transform.position = rb.game_object.transform.position + displacement
-    rb.velocity = rb.velocity.scale(.85)  # Reduced damping from 0.99 to 0.75
+    rb.velocity = rb.velocity.scale(.75)  # Reduced damping from 0.99 to 0.75
 
     # Wrap around horizontally
     if rb.game_object.transform.position.x < 0:

@@ -4,7 +4,7 @@ import random
 
 #settings
 totalBots = 64
-evoFactor = .5
+evoFactor = .3
 
 # usefull methods
 

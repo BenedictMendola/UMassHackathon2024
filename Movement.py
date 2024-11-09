@@ -3,7 +3,7 @@ import VectorMath
 
 
 class PlayerController:
-    def __init__(self, accel_amount=100):  # Increased from 0.5 to 100
+    def __init__(self, accel_amount=75):  # Increased from 0.5 to 100
         # Track individual key states
         self.is_a_pressed = False  # Track 'A' key
         self.is_d_pressed = False  # Track 'D' key
