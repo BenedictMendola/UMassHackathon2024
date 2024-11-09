@@ -6,6 +6,7 @@ def makePlayer(position = VectorMath.Vector3(100,100,0),name = "Player", velocit
     player = GameObjects.GameObject(position,name=name)
     player.rigidbody = Physics.RigidBody(velocity,mass,angularV,player)
     player.addCollider(r= player.sr.surface.get_height()/2)
+    player.addPlayerController()
     return player
 
 def makeKillBox(positon = VectorMath.Vector3(0,0,0),scale = VectorMath.Vector3(3,3,3)):

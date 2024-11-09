@@ -2,6 +2,7 @@ import Transform
 import VectorMath
 import SpriteRenderer
 import Physics
+import Movement
 
 
 class GameObject:
@@ -23,3 +24,5 @@ class GameObject:
             game_object=self,)
     def addCollider(self,upper=1, lower=1, left=1, right=1, r=1):
         self.collider = Physics.Collider(upper, lower, left, right, r)
+    def addPlayerController(self):
+        self.controller = Movement.PlayerController()

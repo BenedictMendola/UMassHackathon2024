@@ -7,6 +7,8 @@ import Physics
 import Movement
 import Prefabs
 
+
+
 # Define screen dimensions
 screen_width, screen_height = 1280, 720  # Updated resolution
 
@@ -19,7 +21,6 @@ gameObjects = []  # this contains all gameobjects, do not store any permanent ga
 gameObjects.append(Prefabs.makePlayer()) # Creates the player Object
 gameObjects.append(Prefabs.makePlayer(position=VectorMath.Vector3(150,150,200)))
 
-print(gameObjects[0].sr)
 
 gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(300,600,300),VectorMath.Vector3(20,5,3)))
 
@@ -35,22 +36,35 @@ gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Ve
 running = True  # AWAYS TRUE WHEN GAME IS RUNNING
 
 # Initialize Movement
-movement = Movement.PlayerController()
+
 
 while running:
+
+    PlayerList = [ob for ob in gameObjects if (ob.name == "Player")]
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         else:
-            movement.handle_event(event)  # Handle movement events
+            for player in PlayerList:
+                player.controller.handle_event(event)
+            #movement.handle_event(event)  # Handle movement events
 
-    acceleration = movement.get_acceleration()
 
-    if acceleration.magnitude() > 0:
-        Physics.addforce(gameObjects[0].rigidbody, acceleration)
+    for player in PlayerList:
+        acceleration = player.controller.get_acceleration()
+        
+        if acceleration.magnitude() > 0:
+            Physics.addforce(player.rigidbody, acceleration)
 
-    Physics.update(gameObjects[0].rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height)
+    # acceleration = movement.get_acceleration()
+
+    # if acceleration.magnitude() > 0:
+    #     Physics.addforce(gameObjects[0].rigidbody, acceleration)
+
+    for player in PlayerList:
+        Physics.update(player.rigidbody, TimeManager.TimeTracker.deltatime, screen_width, screen_height)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
