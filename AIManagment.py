@@ -1,9 +1,11 @@
 import GameRunner
 import AINetworking
 import random
+import json
+import os
 
 #settings
-totalBots = 64
+totalBots = 256
 evoFactor = .5
 
 # usefull methods
@@ -16,12 +18,16 @@ def GenNetwork():
 
     return AINetworking.Network(weights1,weights2,weights3,weights4)
 
-
-
+# Loading from the JSON
+if os.path.exists('networks.json'):
+    with open('networks.json', 'r') as f:
+        data = json.load(f)
+        allNetworks = [AINetworking.Network.from_dict(nw) for nw in data]
+else:
+    allNetworks = [GenNetwork() for l in range(totalBots)]
 
 #Runner Code starts Here
 
-allNetworks = [GenNetwork() for i in range(int(totalBots))]
 running = True
 
 while running:
@@ -33,16 +39,21 @@ while running:
     results = sorted(results)
     #print([result.score for result in results])
     
-    halfNetworks = results[:int(totalBots/2)]
+    halfNetworks = results[:int(totalBots * evoFactor)]
     #print([result.score for result in halfNetworks])
-    for i in range(int(totalBots/2)):
-        weights1 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights2 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights3 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
-        weights4 = [(halfNetworks[i].weights1[j] - (random.randint(-20,20)/20.0 * evoFactor)) for j in range(8)]
+    newNetworks = []
+    for parent in halfNetworks:
+        weights1 = [w - (random.uniform(-1, 1) * evoFactor) for w in parent.weights1]
+        weights2 = [w - (random.uniform(-1, 1) * evoFactor) for w in parent.weights2]
+        weights3 = [w - (random.uniform(-1, 1) * evoFactor) for w in parent.weights3]
+        weights4 = [w - (random.uniform(-1, 1) * evoFactor) for w in parent.weights4]
+        newNetwork = AINetworking.Network(weights1, weights2, weights3, weights4)
+        newNetworks.append(newNetwork)
 
-        newNetwork = AINetworking.Network(weights1,weights2,weights3,weights4)
-        halfNetworks.append(newNetwork)
+    allNetworks = halfNetworks + newNetworks
 
-    
-    
+    # Saving to the JSON
+    with open('networks.json', 'w') as f:
+        json.dump([network.to_dict() for network in allNetworks], f)
+
+

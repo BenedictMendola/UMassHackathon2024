@@ -68,4 +68,21 @@ class Network():
         #print(sum(finalValue))
         return (sum(readyForRow2Inputs))
     
+    def to_dict(self):
+        return {
+            'weights1': self.weights1,
+            'weights2': self.weights2,
+            'weights3': self.weights3,
+            'weights4': self.weights4,
+        }
+
+    @staticmethod
+    def from_dict(data):
+        return Network(
+            data['weights1'],
+            data['weights2'],
+            data['weights3'],
+            data['weights4'],
+        )
+    
 #def choose(dir)
