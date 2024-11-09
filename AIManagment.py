@@ -19,12 +19,8 @@ def GenNetwork():
     return AINetworking.Network(weights1,weights2,weights3,weights4)
 
 # Loading from the JSON
-if os.path.exists('networks.json'):
-    with open('networks.json', 'r') as f:
-        data = json.load(f)
-        allNetworks = [AINetworking.Network.from_dict(nw) for nw in data]
-else:
-    allNetworks = [GenNetwork() for l in range(totalBots)]
+
+allNetworks = [GenNetwork() for i in range(totalBots)]
 
 #Runner Code starts Here
 
@@ -51,9 +47,4 @@ while running:
         newNetworks.append(newNetwork)
 
     allNetworks = halfNetworks + newNetworks
-
-    # Saving to the JSON
-    with open('networks.json', 'w') as f:
-        json.dump([network.to_dict() for network in allNetworks], f)
-
 
