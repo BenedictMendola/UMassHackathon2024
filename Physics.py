@@ -44,17 +44,17 @@ class Collider:
 def collision(object1, object2):
     collision = False
     # above 
-    if object1.game_object.transform.position.y < object2.game_object.transform.position.y + Collider.upper:
-        if (math.sqrt((object1.game_object.transform.position.y)**2 - (object2.game_object.transform.position.y + Collider.upper)**2)):
+    if object1.transform.position.y < object2.transform.position.y + object2.collider.upper:
+        if (math.sqrt((object1.transform.position.y)**2 + (object2.transform.position.y + object2.collider.upper)**2)):
             collision = True
-    elif object1.game_object.transform.position.y > object2.game_object.transform.position.y + Collider.lower:
-        if (math.sqrt((object1.game_object.transform.position.y)**2 - (object2.game_object.transform.position.y + Collider.upper)**2)):
+    elif object1.transform.position.y > object2.transform.position.y - object2.collider.lower:
+        if (math.sqrt((object1.transform.position.y)**2 + (object2.transform.position.y + object2.collider.upper)**2)):
             collision = True
-    elif object1.game_object.transform.position.x < object2.game_object.transform.position.x + Collider.left:
-        if (math.sqrt((object1.game_object.transform.position.x)**2 - (object2.game_object.transform.position.x + Collider.left)**2)):
+    elif object1.transform.position.x < object2.transform.position.x + object2.collider.right:
+        if (math.sqrt((object1.transform.position.x)**2 + (object2.transform.position.x + object2.collider.right)**2)):
             collision = True
-    else:
-        if (math.sqrt((object1.game_object.transform.position.x)**2 - (object2.game_object.transform.position.x + Collider.right)**2)):
+    elif object1.game_object.transform.position.x > object2.game_object.transform.position.x - object2.collider.left:
+        if (math.sqrt((object1.transform.position.x)**2 + (object2.transform.position.x + object2.collider.left)**2)):
             collision = True
             
     print(collision)

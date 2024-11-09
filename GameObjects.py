@@ -22,5 +22,5 @@ class GameObject:
             angularVelocity=0,
             game_object=self,
         )
-    def addCollider(self,upper, lower, left, right, r=0):
+    def addCollider(self,upper=1, lower=1, left=1, right=1, r=1):
         self.collider = Physics.Collider(upper, lower, left, right, r)
