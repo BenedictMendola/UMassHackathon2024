@@ -6,7 +6,7 @@ import os
 import csv
 #settings
 totalBots = 64
-evoFactor = .03
+evoFactor = .02
 
 
 
