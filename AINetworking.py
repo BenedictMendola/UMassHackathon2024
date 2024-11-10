@@ -27,6 +27,10 @@ class Network():
         self.score = score
     def setScore(self,positon):
         self.score += math.sqrt(pow(1280-positon.x,2)+ pow(720-positon.y,2))
+        if(positon.x > 1000):
+            self.score -= 400
+            self.score -= positon.y
+        
     
     def getInputs(position: VectorMath.Vector3,gameObjects,velocity=VectorMath.Vector3(0,0,0)): #Idea, have a point go out until it is within a colider -  checks what is the closes barrier and what type for all directins
         barriers = [ob for ob in gameObjects if ob.name != 'Player']
@@ -65,11 +69,11 @@ class Network():
     def calculateInput(self,inputs) -> float: #gives a float beetween 0 and 1, each input is the distance to the nearest wall, or (0 = up killbox,.33 = right,.66 =down, 1 = left) 0 = normal wall
         readyForRow2Inputs = [Network.weightedSumForAllOfWeight(inputs,weight) for weight in self.weights1]
         readyForRow3Inputs = [Network.weightedSumForAllOfWeight(readyForRow2Inputs,weight) for weight in self.weights2]
-        readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
+        #readyForRow4Inputs = [Network.weightedSumForAllOfWeight(readyForRow3Inputs,weight) for weight in self.weights3]
         #finalValue = [Network.weightedSumForAllOfWeight(readyForRow4Inputs,weight) for weight in self.weights4]
         #print(sum(readyForRow3Inputs))
         #print(sum(finalValue))
-        return (sum(readyForRow4Inputs))
+        return (sum(readyForRow3Inputs))
     
     def to_dict(self):
         return {
