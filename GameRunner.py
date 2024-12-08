@@ -94,7 +94,7 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
     gameObjects = []  # this contains all gameobjects, do not store any permanent game objects anywhere else
 
     for i in range(len(networks)):
-        x = Prefabs.makePlayer(VectorMath.Vector3(150 + random.randint(-30,30),random.randint(-30,30)+ 150,0))
+        x = Prefabs.makePlayer(VectorMath.Vector3(150,150,0))
         x.addAINewtwork(networks[i])
         x.network.score = 0
         gameObjects.append(x) # Creates the player Object with network
@@ -103,10 +103,10 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
 
     #gameObjects.append(Prefabs.makeKillBox(VectorMath.Vector3(850,250,300),VectorMath.Vector3(3,3,3)))
 
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(600,650,300),VectorMath.Vector3(10,10,3)))
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Vector3(3,20,3)))
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(360,355,300),VectorMath.Vector3(3,10,3)))
-    gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(700,300,300),VectorMath.Vector3(40,3,3)))
+    # gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(600,650,300),VectorMath.Vector3(10,10,3)))
+    # gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(900,300,300),VectorMath.Vector3(3,20,3)))
+    # gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(360,355,300),VectorMath.Vector3(3,10,3)))
+    # gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(700,300,300),VectorMath.Vector3(40,3,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(000,000,300),VectorMath.Vector3(300,3,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(000,720,300),VectorMath.Vector3(300,3,3)))
     gameObjects.append(Prefabs.makeBox(VectorMath.Vector3(000,0,300),VectorMath.Vector3(3,300,3)))
@@ -157,15 +157,40 @@ def AIGame(networks): #pass in a list of AI networks, will return the score of e
             #     player.controller.is_w_pressed = False
             #     player.controller.is_s_pressed = True
 
-            if (moveDir <= 6.5 or moveDir >= 8.25): player.controller.is_d_pressed = True
-            else: player.controller.is_d_pressed = False
-            if (6 <= moveDir <= 7.5): player.controller.is_s_pressed = True
-            else:player.controller.is_s_pressed = False
-            if(7.3 <= moveDir <= 8.3):  player.controller.is_a_pressed = True
-            else: player.controller.is_a_pressed = False
-            if(8.0<= moveDir or moveDir <= 5.9): player.controller.is_w_pressed = True
-            else: player.controller.is_w_pressed = False
+            # if (moveDir <= 6.5 or moveDir >= 8.25): player.controller.is_d_pressed = True
+            # else: player.controller.is_d_pressed = False
+            # if (6 <= moveDir <= 7.5): player.controller.is_s_pressed = True
+            # else:player.controller.is_s_pressed = False
+            # if(7.3 <= moveDir <= 8.3):  player.controller.is_a_pressed = True
+            # else: player.controller.is_a_pressed = False
+            # if(8.0<= moveDir or moveDir <= 5.9): player.controller.is_w_pressed = True
+            # else: player.controller.is_w_pressed = False
 
+            player.controller.is_a_pressed = False
+            player.controller.is_d_pressed = False
+            player.controller.is_w_pressed = False
+            player.controller.is_s_pressed = False
+
+            if (moveDir < 3):
+                player.controller.is_w_pressed = True
+            elif(moveDir < 4):
+                player.controller.is_d_pressed = True
+            elif(moveDir < 5):
+                player.controller.is_s_pressed = True    
+            elif(moveDir < 6):
+                player.controller.is_a_pressed = True    
+            elif(moveDir < 7):
+                player.controller.is_a_pressed = True
+                player.controller.is_w_pressed = True
+            elif(moveDir < 8):
+                player.controller.is_w_pressed = True
+                player.controller.is_d_pressed = True        
+            elif(moveDir < 9):
+                player.controller.is_d_pressed = True
+                player.controller.is_s_pressed = True
+            elif(moveDir < 10):
+                player.controller.is_s_pressed = True
+                player.controller.is_a_pressed = True         
 
 
         for player in PlayerList:
